@@ -1,0 +1,9 @@
+[Unit]
+Description=Nag every 30 minutes if there are updates
+
+[Timer]
+OnStartupSec=1min
+OnUnitActiveSec=30min
+
+[Install]
+WantedBy=default.target

@@ -11,7 +11,7 @@ Source2: dnf-nag.service
 Source3: dnf-nag.timer
 Source4: dnf-updater.desktop
 BuildRequires: desktop-file-utils systemd-rpm-macros
-Requires: systemd
+Requires: systemd libnotify bash
 
 %description
 Dnf-updater is an icon that you can click to basically call dnf update.

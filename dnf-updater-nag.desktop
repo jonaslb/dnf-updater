@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=DNF Updater Nag
-Icon=software-update-available
-Exec=/usr/bin/dnf-nag.sh --delay
-Terminal=false
-Type=Application
-Categories=
-# For xdg autostart (better use systemd user for the timer too)

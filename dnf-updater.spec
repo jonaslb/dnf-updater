@@ -10,6 +10,7 @@ Source1: dnf-updater.sh
 Source2: dnf-nag.service
 Source3: dnf-nag.timer
 Source4: dnf-updater.desktop
+Source10: LICENSE
 BuildRequires: desktop-file-utils systemd-rpm-macros
 Requires: systemd libnotify bash
 
@@ -25,21 +26,23 @@ It also uses a systemd timer to send reminders in case there are updates availab
 %build
 
 %install
-install -m 0755 %{SOURCE0} %{buildroot}%{_bindir}/dnf-nag.sh
-install -m 0755 %{SOURCE1} %{buildroot}%{_bindir}/dnf-updater.sh
+install -Dm 0755 %{SOURCE0} -t %{buildroot}%{_bindir}
+install -Dm 0755 %{SOURCE1} -t %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_userunitdir}
 install -m 0644 %{SOURCE2} %{SOURCE3} %{buildroot}%{_userunitdir}
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications %{SOURCE4}
 
 %post
-%systemd_post soft-fn.service
-systemctl --global enable dnf-updater.timer
-systemctl start dnf-updater
+#%systemd_user_post dnf-nag.timer
+# Override Fedora and enable the timer by default.
+# Unfortunately can't be started immediately, users must relog.
+systemctl --global enable dnf-nag.timer
 
 %preun
-%systemd_preun soft-fn.service
+%systemd_user_preun dnf-nag.timer
 
 %postun
-%systemd_postun_with_restart soft-fn.service
+%systemd_user_postun_with_restart dnf-nag.timer
 
 %files
 %license LICENSE

@@ -3,5 +3,3 @@ Description=Nag the user if there are updates
 
 [Service]
 ExecStart=/usr/bin/dnf-nag.sh
-
-[Install]

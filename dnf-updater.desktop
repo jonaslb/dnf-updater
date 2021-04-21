@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=DNF Updater
-Icon=update-manager
+Icon=system-software-update
 Exec=/usr/bin/dnf-updater.sh
 Terminal=true
 Type=Application
